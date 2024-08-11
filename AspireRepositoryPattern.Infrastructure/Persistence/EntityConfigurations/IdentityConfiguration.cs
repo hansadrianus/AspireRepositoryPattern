@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AspireRepositoryPattern.Domain.Entities.auth;
+using Domain.Entities.Auth;
 
 namespace Infrastructure.Persistence.EntityConfigurations
 {

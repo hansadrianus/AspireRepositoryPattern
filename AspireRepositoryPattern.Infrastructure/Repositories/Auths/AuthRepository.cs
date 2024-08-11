@@ -1,7 +1,7 @@
 ﻿using Application.Interfaces.Persistence;
 using Application.Interfaces.Persistence.Auths;
 using Application.ViewModels;
-using AspireRepositoryPattern.Domain.Entities.auth;
+using Domain.Entities.Auth;
 using Infrastructure.Helpers;
 using Infrastructure.Persistence.Configurations;
 using Microsoft.AspNetCore.Identity;

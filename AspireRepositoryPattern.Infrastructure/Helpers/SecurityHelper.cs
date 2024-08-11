@@ -1,4 +1,4 @@
-﻿using AspireRepositoryPattern.Domain.Entities.auth;
+﻿using Domain.Entities.Auth;
 using AutoMapper.Configuration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;

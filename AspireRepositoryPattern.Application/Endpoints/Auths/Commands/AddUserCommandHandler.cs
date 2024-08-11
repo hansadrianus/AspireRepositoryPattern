@@ -4,7 +4,7 @@ using Application.Interfaces.Wrappers;
 using Application.Models;
 using Application.Models.Enumerations;
 using Application.ViewModels;
-using AspireRepositoryPattern.Domain.Entities.auth;
+using Domain.Entities.Auth;
 using AutoMapper;
 using MediatR;
 using System;

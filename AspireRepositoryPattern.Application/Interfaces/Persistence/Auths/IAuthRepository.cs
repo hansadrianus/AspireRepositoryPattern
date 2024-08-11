@@ -1,6 +1,6 @@
 ﻿using Application.Endpoints.Auths.Commands;
 using Application.ViewModels;
-using AspireRepositoryPattern.Domain.Entities.auth;
+using Domain.Entities.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
