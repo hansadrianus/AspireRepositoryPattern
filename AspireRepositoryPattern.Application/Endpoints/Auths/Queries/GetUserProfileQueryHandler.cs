@@ -2,8 +2,8 @@
 using Application.Interfaces.Wrappers;
 using Application.Models;
 using Application.ViewModels;
+using AspireRepositoryPattern.Domain.Entities.auth;
 using AutoMapper;
-using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http.Extensions;
 

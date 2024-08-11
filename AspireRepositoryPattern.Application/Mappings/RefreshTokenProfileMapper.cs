@@ -1,7 +1,7 @@
 using Application.Endpoints.Auths.Commands;
 using Application.ViewModels;
+using AspireRepositoryPattern.Domain.Entities.auth;
 using AutoMapper;
-using Domain.Entities;
 
 namespace Application.Mappings
 {

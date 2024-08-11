@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities
+namespace AspireRepositoryPattern.Domain.Entities.auth
 {
     public class ApplicationUserRole : AuditableUserRoleEntity
     {

@@ -1,6 +1,6 @@
 ﻿using Application.Interfaces.Persistence;
 using Application.Interfaces.Persistence.Auths;
-using Domain.Entities;
+using AspireRepositoryPattern.Domain.Entities.auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities
+namespace AspireRepositoryPattern.Domain.Entities.auth
 {
-    public class ApplicationUserToken : AuditableUserTokenEntity
+    public class ApplicationRoleClaim : AuditableRoleClaimEntity
     {
     }
 }

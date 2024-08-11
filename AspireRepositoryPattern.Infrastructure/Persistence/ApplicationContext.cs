@@ -1,7 +1,7 @@
 ﻿using Application.Interfaces.Persistence;
 using Application.Interfaces.Services;
+using AspireRepositoryPattern.Domain.Entities.auth;
 using Domain.Common;
-using Domain.Entities;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;

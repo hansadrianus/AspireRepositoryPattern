@@ -2,7 +2,7 @@
 using Application.Interfaces.Persistence;
 using Application.Interfaces.Services;
 using Application.Interfaces.Wrappers;
-using Domain.Entities;
+using AspireRepositoryPattern.Domain.Entities.auth;
 using Infrastructure.Attributes;
 using Infrastructure.Persistence;
 using Infrastructure.Persistence.Configurations;

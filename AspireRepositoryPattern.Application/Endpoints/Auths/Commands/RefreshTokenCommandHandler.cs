@@ -3,8 +3,8 @@ using Application.Interfaces.Wrappers;
 using Application.Models;
 using Application.Models.Enumerations;
 using Application.ViewModels;
+using AspireRepositoryPattern.Domain.Entities.auth;
 using AutoMapper;
-using Domain.Entities;
 using MediatR;
 
 namespace Application.Endpoints.Auths.Commands

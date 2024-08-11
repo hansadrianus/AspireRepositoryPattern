@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Models.Enumerations;
-using Domain.Entities;
+using AspireRepositoryPattern.Domain.Entities.auth;
 
 namespace Application.Endpoints.Auths.Commands
 {
