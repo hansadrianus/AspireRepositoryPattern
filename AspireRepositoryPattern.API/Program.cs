@@ -36,9 +36,6 @@ namespace API
             builder.Services.ConfigureIdentity();
             builder.Services.ConfigureJWT(builder.Configuration);
 
-            builder.Services.AddHttpContextAccessor();
-            builder.Services.AddHealthChecks();
-
             builder.Services.AddApiVersioning(options =>
             {
                 options.AssumeDefaultVersionWhenUnspecified = true;
@@ -46,8 +43,6 @@ namespace API
             });
 
             builder.Services.AddScoped<IPrincipalService, PrincipalService>();
-
-            builder.Services.AddControllers();
             builder.Services.AddSwaggerGenForJWT();
 
             var app = builder.Build();
