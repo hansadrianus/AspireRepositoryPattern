@@ -2,6 +2,7 @@
 using Application.Interfaces.Persistence;
 using Application.Interfaces.Services;
 using Application.Interfaces.Wrappers;
+using Azure.Monitor.OpenTelemetry.AspNetCore;
 using Domain.Entities.Auth;
 using Infrastructure.Attributes;
 using Infrastructure.Persistence;
@@ -252,7 +253,7 @@ namespace Infrastructure
                 {
                     tracing.AddAspNetCoreInstrumentation()
                         // Uncomment the following line to enable gRPC instrumentation (requires the OpenTelemetry.Instrumentation.GrpcNetClient package)
-                        //.AddGrpcClientInstrumentation()
+                        .AddGrpcClientInstrumentation()
                         .AddHttpClientInstrumentation();
                 });
 
@@ -315,11 +316,11 @@ namespace Infrastructure
             }
 
             // Uncomment the following lines to enable the Azure Monitor exporter (requires the Azure.Monitor.OpenTelemetry.AspNetCore package)
-            //if (!string.IsNullOrEmpty(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]))
-            //{
-            //    builder.Services.AddOpenTelemetry()
-            //       .UseAzureMonitor();
-            //}
+            if (!string.IsNullOrEmpty(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]))
+            {
+                builder.Services.AddOpenTelemetry()
+                   .UseAzureMonitor();
+            }
 
             return builder;
         }
