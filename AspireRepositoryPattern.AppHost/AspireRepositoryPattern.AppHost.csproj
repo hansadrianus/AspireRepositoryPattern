@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -7,8 +7,6 @@
     <Nullable>enable</Nullable>
     <IsAspireHost>true</IsAspireHost>
     <UserSecretsId>6c23d1a0-3c59-413e-99ff-f4a6cd012fe3</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-	<SkipAddAspireDefaultReferences>true</SkipAddAspireDefaultReferences>
   </PropertyGroup>
 
   <ItemGroup>

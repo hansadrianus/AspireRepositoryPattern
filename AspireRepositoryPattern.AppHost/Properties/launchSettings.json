@@ -36,9 +36,6 @@
         "DOTNET_RESOURCE_SERVICE_ENDPOINT_URL": "https://localhost:22213"
       },
       "distributionName": ""
-    },
-    "Container (Dockerfile)": {
-      "commandName": "Docker"
     }
   },
   "$schema": "https://json.schemastore.org/launchsettings.json"
