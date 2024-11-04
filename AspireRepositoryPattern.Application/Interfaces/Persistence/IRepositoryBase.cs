@@ -40,5 +40,7 @@ namespace Application.Interfaces.Persistence
         void RemoveRange(IEnumerable<TSource> entities);
         void Update(TSource entity);
         void UpdateRange(IEnumerable<TSource> entities);
+        IQueryable<TSource> GetSetCacheData();
+        Task<IQueryable<TSource>> GetSetCacheDataAsync();
     }
 }
