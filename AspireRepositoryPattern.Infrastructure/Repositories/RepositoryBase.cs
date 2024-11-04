@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Caching.Distributed;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
@@ -10,10 +11,12 @@ namespace Infrastructure.Repositories
     public abstract class RepositoryBase<TSource> : IRepositoryBase<TSource> where TSource : class
     {
         protected readonly IApplicationContext _context;
+        protected readonly IDistributedCache _distCache;
 
-        public RepositoryBase(IApplicationContext context)
+        public RepositoryBase(IApplicationContext context, IDistributedCache distCache)
         {
             _context = context;
+            _distCache = distCache;
         }
 
         public virtual void Add(TSource entity)

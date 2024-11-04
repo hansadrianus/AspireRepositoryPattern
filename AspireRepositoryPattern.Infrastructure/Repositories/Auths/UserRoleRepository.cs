@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces.Persistence;
 using Application.Interfaces.Persistence.Auths;
 using Domain.Entities.Auth;
+using Microsoft.Extensions.Caching.Distributed;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Infrastructure.Repositories.Auths
 {
     public class UserRoleRepository : RepositoryBase<ApplicationUserRole>, IUserRoleRepository
     {
-        public UserRoleRepository(IApplicationContext context) : base(context)
+        public UserRoleRepository(IApplicationContext context, IDistributedCache distCache) : base(context, distCache)
         {
         }
     }

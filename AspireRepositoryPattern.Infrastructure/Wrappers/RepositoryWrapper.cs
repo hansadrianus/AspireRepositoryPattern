@@ -4,6 +4,7 @@ using Application.Interfaces.Wrappers;
 using Domain.Entities.Auth;
 using Infrastructure.Repositories.Auths;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 
 namespace Infrastructure.Wrappers
@@ -11,15 +12,17 @@ namespace Infrastructure.Wrappers
     public class RepositoryWrapper : IRepositoryWrapper
     {
         private readonly IApplicationContext _context;
+        private readonly IDistributedCache _distCache;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration _configuration;
         private IAuthRepository _auth;
         private IRoleRepository _role;
         private IUserRoleRepository _userRole;
 
-        public RepositoryWrapper(IApplicationContext context, UserManager<ApplicationUser> userManager, IConfiguration configuration)
+        public RepositoryWrapper(IApplicationContext context, IDistributedCache distCache, UserManager<ApplicationUser> userManager, IConfiguration configuration)
         {
             _context = context;
+            _distCache = distCache;
             _userManager = userManager;
             _configuration = configuration;
         }
@@ -28,7 +31,7 @@ namespace Infrastructure.Wrappers
         {
             get
             {
-                _auth ??= new AuthRepository(_context, _userManager, _configuration);
+                _auth ??= new AuthRepository(_context, _distCache, _userManager, _configuration);
                 return _auth;
             }
         }
@@ -37,7 +40,7 @@ namespace Infrastructure.Wrappers
         {
             get
             {
-                _role ??= new RoleRepository(_context);
+                _role ??= new RoleRepository(_context, _distCache);
                 return _role;
             }
         }
@@ -46,7 +49,7 @@ namespace Infrastructure.Wrappers
         {
             get
             {
-                _userRole ??= new UserRoleRepository(_context);
+                _userRole ??= new UserRoleRepository(_context, _distCache);
                 return _userRole;
             }
         }
