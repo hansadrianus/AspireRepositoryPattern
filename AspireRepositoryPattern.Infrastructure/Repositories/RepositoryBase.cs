@@ -1,10 +1,10 @@
 ﻿using Application.Interfaces.Persistence;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Caching.Distributed;
-using System.Linq;
+using Microsoft.Extensions.Configuration;
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
+using System.Text;
+using System.Text.Json;
 
 namespace Infrastructure.Repositories
 {
@@ -12,11 +12,13 @@ namespace Infrastructure.Repositories
     {
         protected readonly IApplicationContext _context;
         protected readonly IDistributedCache _distCache;
+        private readonly IConfiguration _configuration;
 
-        public RepositoryBase(IApplicationContext context, IDistributedCache distCache)
+        public RepositoryBase(IApplicationContext context, IDistributedCache distCache, IConfiguration configuration)
         {
             _context = context;
             _distCache = distCache;
+            _configuration = configuration;
         }
 
         public virtual void Add(TSource entity)
@@ -68,7 +70,23 @@ namespace Infrastructure.Repositories
             => await _context.Set<TSource>().Where(expression).OrderByDescending(key).LastOrDefaultAsync(cancellationToken);
 
         public virtual IEnumerable<TSource> GetAll()
-            => _context.Set<TSource>().AsEnumerable();
+        {
+            IEnumerable<TSource> data;
+            var cacheKey = typeof(TSource).FullName;
+            var cacheData = _distCache.GetString(cacheKey);
+
+            if (string.IsNullOrEmpty(cacheData))
+            {
+                data = _context.Set<TSource>().AsEnumerable();
+                cacheData = JsonSerializer.Serialize(data);
+                var opt = GetCacheOptions();
+                _distCache.SetString(cacheKey, cacheData, opt);
+            }
+
+            data = JsonSerializer.Deserialize<IEnumerable<TSource>>(cacheData) ?? new List<TSource>();
+
+            return data;
+        }
 
         public virtual IEnumerable<TSource> GetAll(Expression<Func<TSource, bool>> expression)
             => _context.Set<TSource>().Where(expression).AsEnumerable();
@@ -126,5 +144,10 @@ namespace Infrastructure.Repositories
 
         public virtual void UpdateRange(IEnumerable<TSource> entities)
             => _context.Set<TSource>().UpdateRange(entities);
+
+        private DistributedCacheEntryOptions GetCacheOptions()
+            => new DistributedCacheEntryOptions()
+                .SetAbsoluteExpiration(DateTime.UtcNow.AddMinutes(Convert.ToInt32(_configuration["RedisCacheOptions:AbsoluteExpirationInMinutes"])))
+                .SetSlidingExpiration(TimeSpan.FromMinutes(Convert.ToInt32(_configuration["RedisCacheOptions:SlidingExpirationInMinutes"])));
     }
 }

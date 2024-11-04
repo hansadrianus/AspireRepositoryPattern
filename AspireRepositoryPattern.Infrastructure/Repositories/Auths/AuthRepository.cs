@@ -17,7 +17,7 @@ namespace Infrastructure.Repositories.Auths
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration _configuration;
 
-        public AuthRepository(IApplicationContext context, IDistributedCache distCache, UserManager<ApplicationUser> userManager, IConfiguration configuration) : base(context, distCache)
+        public AuthRepository(IApplicationContext context, IDistributedCache distCache, UserManager<ApplicationUser> userManager, IConfiguration configuration) : base(context, distCache, configuration)
         {
             _userManager = userManager;
             _configuration = configuration;

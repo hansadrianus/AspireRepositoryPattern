@@ -15,9 +15,9 @@ namespace Domain.Common
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Uid { get; set; }
         public string CreatedBy { get; set; }
-        public DateTime CreatedTime { get; set; }
+        public DateTime CreatedTimeUTC { get; set; }
         public string? ModifiedBy { get; set; }
-        public DateTime? ModifiedTime { get; set; }
+        public DateTime? ModifiedTimeUTC { get; set; }
         [Timestamp, ConcurrencyCheck]
         public byte[] RowVersion { get; set; }
         public short RowStatus { get; set; }

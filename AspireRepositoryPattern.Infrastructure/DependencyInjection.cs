@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -119,7 +120,7 @@ namespace Infrastructure
             return configBuilder;
         }
 
-        public static IServiceCollection AddStackExchangeRedisCache(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddStackExchangeRedisCacheService(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddStackExchangeRedisCache(options =>
             {

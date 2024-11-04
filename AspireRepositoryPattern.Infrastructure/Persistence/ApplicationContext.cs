@@ -187,12 +187,12 @@ namespace Infrastructure.Persistence
                 {
                     case EntityState.Added:
                         entity.Entity.CreatedBy = _principalService.UserId;
-                        entity.Entity.CreatedTime = _dateTimeService.UtcNow;
+                        entity.Entity.CreatedTimeUTC = _dateTimeService.UtcNow;
                         entity.Entity.RowStatus = 0;
                         break;
                     case EntityState.Modified:
                         entity.Entity.ModifiedBy = _principalService.UserId;
-                        entity.Entity.ModifiedTime = _dateTimeService.UtcNow;
+                        entity.Entity.ModifiedTimeUTC = _dateTimeService.UtcNow;
                         break;
                 }
             }
@@ -203,12 +203,12 @@ namespace Infrastructure.Persistence
                 {
                     case EntityState.Added:
                         entity.Entity.CreatedBy = _principalService.UserId;
-                        entity.Entity.CreatedTime = _dateTimeService.UtcNow;
+                        entity.Entity.CreatedTimeUTC = _dateTimeService.UtcNow;
                         entity.Entity.RowStatus = 0;
                         break;
                     case EntityState.Modified:
                         entity.Entity.ModifiedBy = _principalService.UserId;
-                        entity.Entity.ModifiedTime = _dateTimeService.UtcNow;
+                        entity.Entity.ModifiedTimeUTC = _dateTimeService.UtcNow;
                         break;
                 }
             }
@@ -219,12 +219,12 @@ namespace Infrastructure.Persistence
                 {
                     case EntityState.Added:
                         entity.Entity.CreatedBy = _principalService.UserId;
-                        entity.Entity.CreatedTime = _dateTimeService.UtcNow;
+                        entity.Entity.CreatedTimeUTC = _dateTimeService.UtcNow;
                         entity.Entity.RowStatus = 0;
                         break;
                     case EntityState.Modified:
                         entity.Entity.ModifiedBy = _principalService.UserId;
-                        entity.Entity.ModifiedTime = _dateTimeService.UtcNow;
+                        entity.Entity.ModifiedTimeUTC = _dateTimeService.UtcNow;
                         break;
                 }
             }
@@ -235,12 +235,12 @@ namespace Infrastructure.Persistence
                 {
                     case EntityState.Added:
                         entity.Entity.CreatedBy = _principalService.UserId;
-                        entity.Entity.CreatedTime = _dateTimeService.UtcNow;
+                        entity.Entity.CreatedTimeUTC = _dateTimeService.UtcNow;
                         entity.Entity.RowStatus = 0;
                         break;
                     case EntityState.Modified:
                         entity.Entity.ModifiedBy = _principalService.UserId;
-                        entity.Entity.ModifiedTime = _dateTimeService.UtcNow;
+                        entity.Entity.ModifiedTimeUTC = _dateTimeService.UtcNow;
                         break;
                 }
             }
@@ -256,12 +256,12 @@ namespace Infrastructure.Persistence
                 {
                     case EntityState.Added:
                         entity.Entity.CreatedBy = _principalService.UserId;
-                        entity.Entity.CreatedTime = _dateTimeService.UtcNow;
+                        entity.Entity.CreatedTimeUTC = _dateTimeService.UtcNow;
                         entity.Entity.RowStatus = 0;
                         break;
                     case EntityState.Modified:
                         entity.Entity.ModifiedBy = _principalService.UserId;
-                        entity.Entity.ModifiedTime = _dateTimeService.UtcNow;
+                        entity.Entity.ModifiedTimeUTC = _dateTimeService.UtcNow;
                         break;
                 }
             }
@@ -272,12 +272,12 @@ namespace Infrastructure.Persistence
                 {
                     case EntityState.Added:
                         entity.Entity.CreatedBy = _principalService.UserId;
-                        entity.Entity.CreatedTime = _dateTimeService.UtcNow;
+                        entity.Entity.CreatedTimeUTC = _dateTimeService.UtcNow;
                         entity.Entity.RowStatus = 0;
                         break;
                     case EntityState.Modified:
                         entity.Entity.ModifiedBy = _principalService.UserId;
-                        entity.Entity.ModifiedTime = _dateTimeService.UtcNow;
+                        entity.Entity.ModifiedTimeUTC = _dateTimeService.UtcNow;
                         break;
                 }
             }
@@ -288,12 +288,12 @@ namespace Infrastructure.Persistence
                 {
                     case EntityState.Added:
                         entity.Entity.CreatedBy = _principalService.UserId;
-                        entity.Entity.CreatedTime = _dateTimeService.UtcNow;
+                        entity.Entity.CreatedTimeUTC = _dateTimeService.UtcNow;
                         entity.Entity.RowStatus = 0;
                         break;
                     case EntityState.Modified:
                         entity.Entity.ModifiedBy = _principalService.UserId;
-                        entity.Entity.ModifiedTime = _dateTimeService.UtcNow;
+                        entity.Entity.ModifiedTimeUTC = _dateTimeService.UtcNow;
                         break;
                 }
             }
@@ -304,12 +304,12 @@ namespace Infrastructure.Persistence
                 {
                     case EntityState.Added:
                         entity.Entity.CreatedBy = _principalService.UserId;
-                        entity.Entity.CreatedTime = _dateTimeService.UtcNow;
+                        entity.Entity.CreatedTimeUTC = _dateTimeService.UtcNow;
                         entity.Entity.RowStatus = 0;
                         break;
                     case EntityState.Modified:
                         entity.Entity.ModifiedBy = _principalService.UserId;
-                        entity.Entity.ModifiedTime = _dateTimeService.UtcNow;
+                        entity.Entity.ModifiedTimeUTC = _dateTimeService.UtcNow;
                         break;
                 }
             }
@@ -325,12 +325,12 @@ namespace Infrastructure.Persistence
                 {
                     case EntityState.Added:
                         entity.Entity.CreatedBy = _principalService.UserId;
-                        entity.Entity.CreatedTime = _dateTimeService.UtcNow;
+                        entity.Entity.CreatedTimeUTC = _dateTimeService.UtcNow;
                         entity.Entity.RowStatus = 0;
                         break;
                     case EntityState.Modified:
                         entity.Entity.ModifiedBy = _principalService.UserId;
-                        entity.Entity.ModifiedTime = _dateTimeService.UtcNow;
+                        entity.Entity.ModifiedTimeUTC = _dateTimeService.UtcNow;
                         break;
                 }
             }
@@ -341,12 +341,12 @@ namespace Infrastructure.Persistence
                 {
                     case EntityState.Added:
                         entity.Entity.CreatedBy = _principalService.UserId;
-                        entity.Entity.CreatedTime = _dateTimeService.UtcNow;
+                        entity.Entity.CreatedTimeUTC = _dateTimeService.UtcNow;
                         entity.Entity.RowStatus = 0;
                         break;
                     case EntityState.Modified:
                         entity.Entity.ModifiedBy = _principalService.UserId;
-                        entity.Entity.ModifiedTime = _dateTimeService.UtcNow;
+                        entity.Entity.ModifiedTimeUTC = _dateTimeService.UtcNow;
                         break;
                 }
             }
@@ -357,12 +357,12 @@ namespace Infrastructure.Persistence
                 {
                     case EntityState.Added:
                         entity.Entity.CreatedBy = _principalService.UserId;
-                        entity.Entity.CreatedTime = _dateTimeService.UtcNow;
+                        entity.Entity.CreatedTimeUTC = _dateTimeService.UtcNow;
                         entity.Entity.RowStatus = 0;
                         break;
                     case EntityState.Modified:
                         entity.Entity.ModifiedBy = _principalService.UserId;
-                        entity.Entity.ModifiedTime = _dateTimeService.UtcNow;
+                        entity.Entity.ModifiedTimeUTC = _dateTimeService.UtcNow;
                         break;
                 }
             }
@@ -373,12 +373,12 @@ namespace Infrastructure.Persistence
                 {
                     case EntityState.Added:
                         entity.Entity.CreatedBy = _principalService.UserId;
-                        entity.Entity.CreatedTime = _dateTimeService.UtcNow;
+                        entity.Entity.CreatedTimeUTC = _dateTimeService.UtcNow;
                         entity.Entity.RowStatus = 0;
                         break;
                     case EntityState.Modified:
                         entity.Entity.ModifiedBy = _principalService.UserId;
-                        entity.Entity.ModifiedTime = _dateTimeService.UtcNow;
+                        entity.Entity.ModifiedTimeUTC = _dateTimeService.UtcNow;
                         break;
                 }
             }
@@ -394,12 +394,12 @@ namespace Infrastructure.Persistence
                 {
                     case EntityState.Added:
                         entity.Entity.CreatedBy = _principalService.UserId;
-                        entity.Entity.CreatedTime = _dateTimeService.UtcNow;
+                        entity.Entity.CreatedTimeUTC = _dateTimeService.UtcNow;
                         entity.Entity.RowStatus = 0;
                         break;
                     case EntityState.Modified:
                         entity.Entity.ModifiedBy = _principalService.UserId;
-                        entity.Entity.ModifiedTime = _dateTimeService.UtcNow;
+                        entity.Entity.ModifiedTimeUTC = _dateTimeService.UtcNow;
                         break;
                 }
             }
@@ -410,12 +410,12 @@ namespace Infrastructure.Persistence
                 {
                     case EntityState.Added:
                         entity.Entity.CreatedBy = _principalService.UserId;
-                        entity.Entity.CreatedTime = _dateTimeService.UtcNow;
+                        entity.Entity.CreatedTimeUTC = _dateTimeService.UtcNow;
                         entity.Entity.RowStatus = 0;
                         break;
                     case EntityState.Modified:
                         entity.Entity.ModifiedBy = _principalService.UserId;
-                        entity.Entity.ModifiedTime = _dateTimeService.UtcNow;
+                        entity.Entity.ModifiedTimeUTC = _dateTimeService.UtcNow;
                         break;
                 }
             }
@@ -426,12 +426,12 @@ namespace Infrastructure.Persistence
                 {
                     case EntityState.Added:
                         entity.Entity.CreatedBy = _principalService.UserId;
-                        entity.Entity.CreatedTime = _dateTimeService.UtcNow;
+                        entity.Entity.CreatedTimeUTC = _dateTimeService.UtcNow;
                         entity.Entity.RowStatus = 0;
                         break;
                     case EntityState.Modified:
                         entity.Entity.ModifiedBy = _principalService.UserId;
-                        entity.Entity.ModifiedTime = _dateTimeService.UtcNow;
+                        entity.Entity.ModifiedTimeUTC = _dateTimeService.UtcNow;
                         break;
                 }
             }
@@ -442,12 +442,12 @@ namespace Infrastructure.Persistence
                 {
                     case EntityState.Added:
                         entity.Entity.CreatedBy = _principalService.UserId;
-                        entity.Entity.CreatedTime = _dateTimeService.UtcNow;
+                        entity.Entity.CreatedTimeUTC = _dateTimeService.UtcNow;
                         entity.Entity.RowStatus = 0;
                         break;
                     case EntityState.Modified:
                         entity.Entity.ModifiedBy = _principalService.UserId;
-                        entity.Entity.ModifiedTime = _dateTimeService.UtcNow;
+                        entity.Entity.ModifiedTimeUTC = _dateTimeService.UtcNow;
                         break;
                 }
             }

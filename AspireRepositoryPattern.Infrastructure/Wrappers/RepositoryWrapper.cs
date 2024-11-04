@@ -40,7 +40,7 @@ namespace Infrastructure.Wrappers
         {
             get
             {
-                _role ??= new RoleRepository(_context, _distCache);
+                _role ??= new RoleRepository(_context, _distCache, _configuration);
                 return _role;
             }
         }
@@ -49,7 +49,7 @@ namespace Infrastructure.Wrappers
         {
             get
             {
-                _userRole ??= new UserRoleRepository(_context, _distCache);
+                _userRole ??= new UserRoleRepository(_context, _distCache, _configuration);
                 return _userRole;
             }
         }

@@ -8,6 +8,7 @@ using Infrastructure;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
@@ -35,7 +36,7 @@ namespace API
             builder.Services.AddAuthentication();
             builder.Services.ConfigureIdentity();
             builder.Services.ConfigureJWT(builder.Configuration);
-            builder.Services.AddStackExchangeRedisCache(builder.Configuration);
+            builder.Services.AddStackExchangeRedisCacheService(builder.Configuration);
 
             builder.Services.AddApiVersioning(options =>
             {

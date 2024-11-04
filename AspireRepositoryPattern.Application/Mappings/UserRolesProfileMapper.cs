@@ -21,9 +21,9 @@ namespace Application.Mappings
                 .ReverseMap();
             CreateMap<UserRolesCommand, ApplicationUserRole>()
                 .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
-                .ForMember(dest => dest.CreatedTime, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedTimeUTC, opt => opt.Ignore())
                 .ForMember(dest => dest.ModifiedBy, opt => opt.Ignore())
-                .ForMember(dest => dest.ModifiedTime, opt => opt.Ignore())
+                .ForMember(dest => dest.ModifiedTimeUTC, opt => opt.Ignore())
                 .ForMember(dest => dest.RowVersion, opt => opt.Ignore());
             CreateMap<GetUserRolesQuery, GetRoleQuery>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RoleId))
