@@ -5,6 +5,7 @@ using Domain.Entities.Auth;
 using Infrastructure.Helpers;
 using Infrastructure.Persistence.Configurations;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -16,7 +17,7 @@ namespace Infrastructure.Repositories.Auths
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration _configuration;
 
-        public AuthRepository(IApplicationContext context, UserManager<ApplicationUser> userManager, IConfiguration configuration) : base(context)
+        public AuthRepository(IApplicationContext context, IDistributedCache distCache, UserManager<ApplicationUser> userManager, IConfiguration configuration) : base(context, distCache, configuration)
         {
             _userManager = userManager;
             _configuration = configuration;

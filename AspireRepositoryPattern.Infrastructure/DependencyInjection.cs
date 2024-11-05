@@ -1,10 +1,8 @@
-﻿using Application.Interfaces.Attributes;
-using Application.Interfaces.Persistence;
+﻿using Application.Interfaces.Persistence;
 using Application.Interfaces.Services;
 using Application.Interfaces.Wrappers;
 using Azure.Monitor.OpenTelemetry.AspNetCore;
 using Domain.Entities.Auth;
-using Infrastructure.Attributes;
 using Infrastructure.Persistence;
 using Infrastructure.Persistence.Configurations;
 using Infrastructure.Services;
@@ -17,19 +15,18 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.Identity.Web;
 using Microsoft.OpenApi.Models;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
 using Prometheus;
-using System.Configuration;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
@@ -121,6 +118,17 @@ namespace Infrastructure
             }
 
             return configBuilder;
+        }
+
+        public static IServiceCollection AddStackExchangeRedisCacheService(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = configuration["RedisCacheOptions:Configuration"];
+                options.InstanceName = configuration["RedisCacheOptions:InstanceName"];
+            });
+
+            return services;
         }
 
         public static IServiceCollection AddSwaggerGenForJWT(this IServiceCollection services)

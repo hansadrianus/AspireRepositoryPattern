@@ -26,18 +26,18 @@ namespace Application.Mappings
                 .ForMember(dest => dest.ConcurrencyStamp, opt => opt.Ignore())
                 .ForMember(dest => dest.RowStatus, opt => opt.MapFrom(src => 0))
                 .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
-                .ForMember(dest => dest.CreatedTime, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedTimeUTC, opt => opt.Ignore())
                 .ForMember(dest => dest.ModifiedBy, opt => opt.Ignore())
-                .ForMember(dest => dest.ModifiedTime, opt => opt.Ignore())
+                .ForMember(dest => dest.ModifiedTimeUTC, opt => opt.Ignore())
                 .ForMember(dest => dest.RowVersion, opt => opt.Ignore());
             CreateMap<UpdateRoleCommand, ApplicationRole>()
                 .ForMember(dest => dest.NormalizedName, opt => opt.Ignore())
                 .ForMember(dest => dest.ConcurrencyStamp, opt => opt.Ignore())
                 .ForMember(dest => dest.RowStatus, opt => opt.MapFrom(src => 0))
                 .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
-                .ForMember(dest => dest.CreatedTime, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedTimeUTC, opt => opt.Ignore())
                 .ForMember(dest => dest.ModifiedBy, opt => opt.Ignore())
-                .ForMember(dest => dest.ModifiedTime, opt => opt.Ignore())
+                .ForMember(dest => dest.ModifiedTimeUTC, opt => opt.Ignore())
                 .ForMember(dest => dest.RowVersion, opt => opt.Ignore());
         }
     }

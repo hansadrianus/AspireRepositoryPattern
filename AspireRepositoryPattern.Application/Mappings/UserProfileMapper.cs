@@ -33,9 +33,9 @@ namespace Application.Mappings
                 .ForMember(dest => dest.PasswordHash, opt => opt.MapFrom(src => "Password123!@#"))
                 .ForMember(dest => dest.RowStatus, opt => opt.MapFrom(src => 0))
                 .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
-                .ForMember(dest => dest.CreatedTime, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedTimeUTC, opt => opt.Ignore())
                 .ForMember(dest => dest.ModifiedBy, opt => opt.Ignore())
-                .ForMember(dest => dest.ModifiedTime, opt => opt.Ignore())
+                .ForMember(dest => dest.ModifiedTimeUTC, opt => opt.Ignore())
                 .ForMember(dest => dest.RowVersion, opt => opt.Ignore());
             CreateMap<UpdateUserCommand, ApplicationUser>()
                 .ForMember(dest => dest.NormalizedUserName, opt => opt.Ignore())
@@ -52,9 +52,9 @@ namespace Application.Mappings
                 .ForMember(dest => dest.PasswordHash, opt => opt.Ignore())
                 .ForMember(dest => dest.RowStatus, opt => opt.MapFrom(src => (src.RowStatus == 0) ? 1 : 0))
                 .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
-                .ForMember(dest => dest.CreatedTime, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedTimeUTC, opt => opt.Ignore())
                 .ForMember(dest => dest.ModifiedBy, opt => opt.Ignore())
-                .ForMember(dest => dest.ModifiedTime, opt => opt.Ignore())
+                .ForMember(dest => dest.ModifiedTimeUTC, opt => opt.Ignore())
                 .ForMember(dest => dest.RowVersion, opt => opt.Ignore());
         }
     }

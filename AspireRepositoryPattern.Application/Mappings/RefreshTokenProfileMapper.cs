@@ -32,9 +32,9 @@ namespace Application.Mappings
                 .ForMember(dest => dest.PasswordHash, opt => opt.Ignore())
                 .ForMember(dest => dest.RowStatus, opt => opt.MapFrom(src => 0))
                 .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
-                .ForMember(dest => dest.CreatedTime, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedTimeUTC, opt => opt.Ignore())
                 .ForMember(dest => dest.ModifiedBy, opt => opt.Ignore())
-                .ForMember(dest => dest.ModifiedTime, opt => opt.Ignore())
+                .ForMember(dest => dest.ModifiedTimeUTC, opt => opt.Ignore())
                 .ForMember(dest => dest.RowVersion, opt => opt.Ignore())
                 .ForMember(dest => dest.Token, opt => opt.MapFrom(src => src.AccessToken))
                 .ForMember(dest => dest.RefreshToken, opt => opt.MapFrom(src => src.RefreshToken));

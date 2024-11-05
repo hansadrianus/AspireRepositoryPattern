@@ -1,6 +1,6 @@
 ﻿using Application.Interfaces;
+using FluentValidation;
 using FluentValidation.AspNetCore;
-using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -15,7 +15,9 @@ namespace Application
 
             var thisAssembly = Assembly.GetExecutingAssembly();
             services.AddAutoMapper(thisAssembly);
-            services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(thisAssembly));
+            services.AddFluentValidationAutoValidation();
+            services.AddFluentValidationClientsideAdapters();
+            services.AddValidatorsFromAssembly(thisAssembly);
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(thisAssembly));
 
             return services;

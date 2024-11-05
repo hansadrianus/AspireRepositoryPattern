@@ -1,19 +1,24 @@
 ﻿using Application.Interfaces.Persistence;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Linq;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Configuration;
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
+using System.Text;
+using System.Text.Json;
 
 namespace Infrastructure.Repositories
 {
     public abstract class RepositoryBase<TSource> : IRepositoryBase<TSource> where TSource : class
     {
         protected readonly IApplicationContext _context;
+        protected readonly IDistributedCache _distCache;
+        private readonly IConfiguration _configuration;
 
-        public RepositoryBase(IApplicationContext context)
+        public RepositoryBase(IApplicationContext context, IDistributedCache distCache, IConfiguration configuration)
         {
             _context = context;
+            _distCache = distCache;
+            _configuration = configuration;
         }
 
         public virtual void Add(TSource entity)
@@ -29,88 +34,88 @@ namespace Infrastructure.Repositories
             => await _context.Set<TSource>().AddRangeAsync(entities, cancellationToken);
 
         public virtual TSource Get(Expression<Func<TSource, bool>> expression)
-            => _context.Set<TSource>().FirstOrDefault(expression);
+            => GetSetCacheData().FirstOrDefault(expression);
 
         public virtual async Task<TSource> GetAsync(Expression<Func<TSource, bool>> expression, CancellationToken cancellationToken = default)
-            => await _context.Set<TSource>().FirstOrDefaultAsync(expression, cancellationToken);
+            => await GetSetCacheData().FirstOrDefaultAsync(expression, cancellationToken);
 
         public virtual TSource GetByDescending<TKey>(Expression<Func<TSource, bool>> expression, Expression<Func<TSource, TKey>> key)
-            => _context.Set<TSource>().OrderByDescending(key).FirstOrDefault(expression);
+            => GetSetCacheData().OrderByDescending(key).FirstOrDefault(expression);
 
         public virtual async Task<TSource> GetByDescendingAsync<TKey>(Expression<Func<TSource, bool>> expression, Expression<Func<TSource, TKey>> key, CancellationToken cancellationToken = default)
-            => await _context.Set<TSource>().OrderByDescending(key).FirstOrDefaultAsync(expression, cancellationToken);
+            => await GetSetCacheData().OrderByDescending(key).FirstOrDefaultAsync(expression, cancellationToken);
 
         public virtual TSource GetLast<TKey>(Expression<Func<TSource, TKey>> key)
-            => _context.Set<TSource>().OrderBy(key).LastOrDefault();
+            => GetSetCacheData().OrderBy(key).LastOrDefault();
 
         public virtual TSource GetLast<TKey>(Expression<Func<TSource, bool>> expression, Expression<Func<TSource, TKey>> key)
-            => _context.Set<TSource>().Where(expression).OrderBy(key).LastOrDefault();
+            => GetSetCacheData().Where(expression).OrderBy(key).LastOrDefault();
 
         public virtual TSource GetLastByDescending<TKey>(Expression<Func<TSource, TKey>> key)
-            => _context.Set<TSource>().OrderByDescending(key).LastOrDefault();
+            => GetSetCacheData().OrderByDescending(key).LastOrDefault();
 
         public virtual TSource GetLastByDescending<TKey>(Expression<Func<TSource, bool>> expression, Expression<Func<TSource, TKey>> key)
-            => _context.Set<TSource>().Where(expression).OrderByDescending(key).LastOrDefault();
+            => GetSetCacheData().Where(expression).OrderByDescending(key).LastOrDefault();
 
         public virtual async Task<TSource> GetLastAsync<TKey>(Expression<Func<TSource, TKey>> key, CancellationToken cancellationToken = default)
-            => await _context.Set<TSource>().OrderBy(key).LastOrDefaultAsync(cancellationToken);
+            => await GetSetCacheData().OrderBy(key).LastOrDefaultAsync(cancellationToken);
 
         public virtual async Task<TSource> GetLastAsync<TKey>(Expression<Func<TSource, bool>> expression, Expression<Func<TSource, TKey>> key, CancellationToken cancellationToken = default)
-            => await _context.Set<TSource>().Where(expression).OrderBy(key).LastOrDefaultAsync(cancellationToken);
+            => await GetSetCacheData().Where(expression).OrderBy(key).LastOrDefaultAsync(cancellationToken);
 
         public virtual async Task<TSource> GetLastByDescendingAsync<TKey>(Expression<Func<TSource, TKey>> key, CancellationToken cancellationToken = default)
-            => await _context.Set<TSource>().OrderByDescending(key).LastOrDefaultAsync(cancellationToken);
+            => await GetSetCacheData().OrderByDescending(key).LastOrDefaultAsync(cancellationToken);
 
         public virtual async Task<TSource> GetLastByDescendingAsync<TKey>(Expression<Func<TSource, bool>> expression, Expression<Func<TSource, TKey>> key, CancellationToken cancellationToken = default)
-            => await _context.Set<TSource>().Where(expression).OrderByDescending(key).LastOrDefaultAsync(cancellationToken);
+            => await GetSetCacheData().Where(expression).OrderByDescending(key).LastOrDefaultAsync(cancellationToken);
 
         public virtual IEnumerable<TSource> GetAll()
-            => _context.Set<TSource>().AsEnumerable();
+            => GetSetCacheData();
 
         public virtual IEnumerable<TSource> GetAll(Expression<Func<TSource, bool>> expression)
-            => _context.Set<TSource>().Where(expression).AsEnumerable();
+            => GetSetCacheData().Where(expression).AsEnumerable();
 
         public virtual IEnumerable<TSource> GetAll<TKey>(Expression<Func<TSource, TKey>> key)
-            => _context.Set<TSource>().OrderBy(key).AsEnumerable();
+            => GetSetCacheData().OrderBy(key).AsEnumerable();
 
         public virtual IEnumerable<TSource> GetAll<TKey>(Expression<Func<TSource, bool>> expression, Expression<Func<TSource, TKey>> key)
-            => _context.Set<TSource>().Where(expression).OrderBy(key).AsEnumerable();
+            => GetSetCacheData().Where(expression).OrderBy(key).AsEnumerable();
 
         public virtual IEnumerable<TSource> GetAllByDescending()
-            => _context.Set<TSource>().Reverse().AsEnumerable();
+            => GetSetCacheData().Reverse().AsEnumerable();
 
         public virtual IEnumerable<TSource> GetAllByDescending(Expression<Func<TSource, bool>> expression)
-            => _context.Set<TSource>().Where(expression).Reverse().AsEnumerable();
+            => GetSetCacheData().Where(expression).Reverse().AsEnumerable();
 
         public virtual IEnumerable<TSource> GetAllByDescending<TKey>(Expression<Func<TSource, TKey>> key)
-            => _context.Set<TSource>().OrderByDescending(key).AsEnumerable();
+            => GetSetCacheData().OrderByDescending(key).AsEnumerable();
 
         public virtual IEnumerable<TSource> GetAllByDescending<TKey>(Expression<Func<TSource, bool>> expression, Expression<Func<TSource, TKey>> key)
-            => _context.Set<TSource>().Where(expression).OrderByDescending(key).AsEnumerable();
+            => GetSetCacheData().Where(expression).OrderByDescending(key).AsEnumerable();
 
         public virtual async Task<IEnumerable<TSource>> GetAllAsync(CancellationToken cancellationToken = default)
-            => await _context.Set<TSource>().ToListAsync(cancellationToken);
+            => await GetSetCacheData().ToListAsync(cancellationToken);
 
         public virtual async Task<IEnumerable<TSource>> GetAllAsync(Expression<Func<TSource, bool>> expression, CancellationToken cancellationToken = default)
-            => await _context.Set<TSource>().Where(expression).ToListAsync(cancellationToken);
+            => await GetSetCacheData().Where(expression).ToListAsync(cancellationToken);
 
         public virtual async Task<IEnumerable<TSource>> GetAllAsync<TKey>(Expression<Func<TSource, TKey>> key, CancellationToken cancellationToken = default)
-            => await _context.Set<TSource>().OrderBy(key).ToListAsync(cancellationToken);
+            => await GetSetCacheData().OrderBy(key).ToListAsync(cancellationToken);
 
         public virtual async Task<IEnumerable<TSource>> GetAllAsync<TKey>(Expression<Func<TSource, bool>> expression, Expression<Func<TSource, TKey>> key, CancellationToken cancellationToken = default)
-            => await _context.Set<TSource>().Where(expression).OrderBy(key).ToListAsync(cancellationToken);
+            => await GetSetCacheData().Where(expression).OrderBy(key).ToListAsync(cancellationToken);
 
         public virtual async Task<IEnumerable<TSource>> GetAllByDescendingAsync(CancellationToken cancellationToken = default)
-            => await _context.Set<TSource>().Reverse().ToListAsync(cancellationToken);
+            => await GetSetCacheData().Reverse().ToListAsync(cancellationToken);
 
         public virtual async Task<IEnumerable<TSource>> GetAllByDescendingAsync(Expression<Func<TSource, bool>> expression, CancellationToken cancellationToken = default)
-            => await _context.Set<TSource>().Where(expression).Reverse().ToListAsync(cancellationToken);
+            => await GetSetCacheData().Where(expression).Reverse().ToListAsync(cancellationToken);
 
         public virtual async Task<IEnumerable<TSource>> GetAllByDescendingAsync<TKey>(Expression<Func<TSource, TKey>> key, CancellationToken cancellationToken = default)
-            => await _context.Set<TSource>().OrderByDescending(key).ToListAsync(cancellationToken);
+            => await GetSetCacheData().OrderByDescending(key).ToListAsync(cancellationToken);
 
         public virtual async Task<IEnumerable<TSource>> GetAllByDescendingAsync<TKey>(Expression<Func<TSource, bool>> expression, Expression<Func<TSource, TKey>> key, CancellationToken cancellationToken = default)
-            => await _context.Set<TSource>().Where(expression).OrderByDescending(key).ToListAsync(cancellationToken);
+            => await GetSetCacheData().Where(expression).OrderByDescending(key).ToListAsync(cancellationToken);
 
         public virtual void Remove(TSource entity)
             => _context.Set<TSource>().Remove(entity);
@@ -123,5 +128,48 @@ namespace Infrastructure.Repositories
 
         public virtual void UpdateRange(IEnumerable<TSource> entities)
             => _context.Set<TSource>().UpdateRange(entities);
+
+        public IQueryable<TSource> GetSetCacheData()
+        {
+            IQueryable<TSource> data;
+            var cacheKey = typeof(TSource).Name;
+            var cacheData = _distCache.GetString(cacheKey);
+
+            if (string.IsNullOrEmpty(cacheData))
+            {
+                data = _context.Set<TSource>();
+                cacheData = JsonSerializer.Serialize(data);
+                var opt = GetCacheOptions();
+                _distCache.SetString(cacheKey, cacheData, opt);
+            }
+
+            data = JsonSerializer.Deserialize<IQueryable<TSource>>(cacheData);
+
+            return data;
+        }
+
+        public async Task<IQueryable<TSource>> GetSetCacheDataAsync()
+        {
+            IQueryable<TSource> data;
+            var cacheKey = typeof(TSource).Name;
+            var cacheData = await _distCache.GetStringAsync(cacheKey);
+
+            if (string.IsNullOrEmpty(cacheData))
+            {
+                data = _context.Set<TSource>();
+                cacheData = JsonSerializer.Serialize(data);
+                var opt = GetCacheOptions();
+                await _distCache.SetStringAsync(cacheKey, cacheData, opt);
+            }
+
+            data = JsonSerializer.Deserialize<IQueryable<TSource>>(cacheData);
+
+            return data;
+        }
+
+        private DistributedCacheEntryOptions GetCacheOptions()
+            => new DistributedCacheEntryOptions()
+                .SetAbsoluteExpiration(DateTime.UtcNow.AddMinutes(Convert.ToInt32(_configuration["RedisCacheOptions:AbsoluteExpirationInMinutes"])))
+                .SetSlidingExpiration(TimeSpan.FromMinutes(Convert.ToInt32(_configuration["RedisCacheOptions:SlidingExpirationInMinutes"])));
     }
 }
