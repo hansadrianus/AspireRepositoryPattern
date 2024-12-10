@@ -1,17 +1,10 @@
 using API.Services;
 using Application;
-using Application.Interfaces.Persistence;
 using Application.Interfaces.Services;
 using Asp.Versioning;
-using Domain.Entities;
 using Infrastructure;
 using Infrastructure.Persistence;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Net.Http.Headers;
-using Microsoft.OpenApi.Models;
 
 namespace API
 {

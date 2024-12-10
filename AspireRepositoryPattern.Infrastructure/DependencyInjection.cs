@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces.Persistence;
 using Application.Interfaces.Services;
 using Application.Interfaces.Wrappers;
+using AspireRepositoryPattern.Infrastructure.Hubs;
 using Azure.Monitor.OpenTelemetry.AspNetCore;
 using Domain.Entities.Auth;
 using Infrastructure.Persistence;
@@ -15,7 +16,6 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -97,6 +97,7 @@ namespace Infrastructure
                     .Build();
                 options.Filters.Add(new AuthorizeFilter(policy));
             });
+            builder.Services.AddSignalR();
 
             return builder;
         }
@@ -307,6 +308,7 @@ namespace Infrastructure
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/chat");
             });
 
             return app;
